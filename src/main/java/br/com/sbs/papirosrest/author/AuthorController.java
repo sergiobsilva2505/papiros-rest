@@ -16,8 +16,8 @@ public class AuthorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Author>> findAll(){
+    public ResponseEntity<List<AuthorDTO>> findAll(){
         List<Author> authors = authorRepository.findAll();
-        return ResponseEntity.ok().body(authors);
+        return ResponseEntity.ok().body(AuthorDTO.fromEntity(authors));
     }
 }

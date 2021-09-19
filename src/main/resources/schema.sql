@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS authors (
-    id BIGINT NOT NULL PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     emaiL VARCHAR(50),
     birth_date DATE,
     name VARCHAR(50),

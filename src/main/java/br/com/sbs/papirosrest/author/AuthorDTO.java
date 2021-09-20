@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 public class AuthorDTO {
 
+    private Long id;
     private String email;
     private LocalDate birthDate;
     private String name;
@@ -18,6 +19,7 @@ public class AuthorDTO {
     }
 
     public AuthorDTO(Author author) {
+        this.id = author.getId();
         this.email = author.getEmail();
         this.birthDate = author.getBirthDate();
         this.name = author.getName();

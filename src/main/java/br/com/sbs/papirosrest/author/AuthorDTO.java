@@ -1,22 +1,28 @@
 package br.com.sbs.papirosrest.author;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
+
 public class AuthorDTO {
 
+    @JsonProperty
     private Long id;
-    private String email;
-    private LocalDate birthDate;
-    private String name;
-    private String miniResume;
 
-    @Deprecated
-    public AuthorDTO() {
-    }
+    @JsonProperty
+    private String email;
+
+    @JsonProperty
+    private LocalDate birthDate;
+
+    @JsonProperty
+    private String name;
+
+    @JsonProperty
+    private String miniResume;
 
     public AuthorDTO(Author author) {
         this.id = author.getId();
@@ -26,7 +32,4 @@ public class AuthorDTO {
         this.miniResume = author.getMiniResume();
     }
 
-    public static List<AuthorDTO> fromEntity(List<Author> authors) {
-        return authors.stream().map(AuthorDTO::new).toList();
-    }
 }

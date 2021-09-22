@@ -12,7 +12,7 @@ public class NewAuthorForm {
     private String name;
     private String miniResume;
 
-    public Author toEntity(){
+    public Author toEntity() {
         return new Author(email, birthDate, name, miniResume);
     }
 }

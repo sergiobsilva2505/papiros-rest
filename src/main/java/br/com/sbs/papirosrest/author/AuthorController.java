@@ -3,9 +3,7 @@ package br.com.sbs.papirosrest.author;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.swing.*;
 import java.net.URI;
 import java.util.*;
 
@@ -22,15 +20,16 @@ public class AuthorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AuthorDTO>> findAll(){
+    public ResponseEntity<List<AuthorDTO>> findAll() {
         List<Author> authors = authorRepository.findAll();
-        return ResponseEntity.ok().body(AuthorDTO.fromEntity(authors));
+        List<AuthorDTO> authorDTOS = authors.stream().map(AuthorDTO::new).toList();
+        return ResponseEntity.ok().body(authorDTOS);
     }
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody NewAuthorForm newAuthorForm) {
         Optional<Author> author = authorRepository.findByEmail(newAuthorForm.getEmail());
-        if(author.isPresent()){
+        if (author.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, newAuthorForm.getEmail());
         }
         Author newAuthor = newAuthorForm.toEntity();

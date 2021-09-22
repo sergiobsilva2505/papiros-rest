@@ -1,9 +1,11 @@
 package br.com.sbs.papirosrest.author;
 
+import br.com.sbs.papirosrest.book.Book;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.*;
 
 @Getter
 @Entity
@@ -17,6 +19,13 @@ public class Author {
     private LocalDate birthDate;
     private String name;
     private String miniResume;
+
+    @ManyToMany
+    @JoinTable(
+            name = "author_books",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> books = new HashSet<>();
 
     @Deprecated
     public Author() {

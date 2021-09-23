@@ -28,9 +28,9 @@ public class AuthorController {
 
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody NewAuthorForm newAuthorForm) {
-        Optional<Author> author = authorRepository.findByEmail(newAuthorForm.getEmail());
+        Optional<Author> author = authorRepository.findByEmail(newAuthorForm.email());
         if (author.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, newAuthorForm.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, newAuthorForm.email());
         }
         Author newAuthor = newAuthorForm.toEntity();
         newAuthor = authorRepository.save(newAuthor);

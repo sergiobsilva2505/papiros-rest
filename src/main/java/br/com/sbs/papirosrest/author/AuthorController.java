@@ -26,6 +26,14 @@ public class AuthorController {
         return ResponseEntity.ok().body(authorDTOS);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AuthorDTO> findById(@PathVariable Long id) {
+        Author author = authorRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        AuthorDTO authorDTO = new AuthorDTO(author);
+        return ResponseEntity.ok().body(authorDTO);
+    }
+
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody NewAuthorForm newAuthorForm) {
         Optional<Author> author = authorRepository.findByEmail(newAuthorForm.email());
